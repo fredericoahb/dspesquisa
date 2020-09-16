@@ -1,11 +1,14 @@
 import React from 'react';
 import { ReactComponent as Logo} from '../../assets/logo.svg';
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
     <header className="main-header">
 
         <Logo />
+
+        <Link to="/">
 
         <div className="logo-text">
 
@@ -13,6 +16,8 @@ const Header = () => (
             <span className="logo-text-2"> Survey</span>
     
         </div>
+
+        </Link>
 
     </header>
 );
