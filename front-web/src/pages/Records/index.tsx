@@ -4,20 +4,36 @@ import { RecordsResponse } from './types';
 import { formatDate } from './helpers';
 import axios from 'axios';
 import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
+import filters from '../../components/Filters';
+import Filters from '../../components/Filters';
 
 const BASE_URL = 'http://localhost:8080'
 
 const Records = () => {
     const [recordsResponse, setRecordsResponse] = useState<RecordsResponse>();
+    const [activePage, setActivePage] = useState(0);
 
     useEffect(() => { 
-        axios.get(`${BASE_URL}/records?linesPerPage=12`)
+        axios.get(`${BASE_URL}/records?linesPerPage=12&page=${activePage}`)
         .then(response =>setRecordsResponse(response.data));
 }, []); 
+
+const handlePageChange = (index: number) => {
+    setActivePage(index);
+}
 
     return (
 
             <h1 className="page-container">
+                <Filters link="/charts" linkText="VER GRÀFICO"/>
+                <div className="filters-container records-actions">
+                    <Link to="/charts">
+                        <button className="action-filters">
+                            VER GRÁFICOS
+                        </button>
+                    </Link>
+                    </div>
                 <table className="records-table" cellPadding="0" cellSpacing="0">
                     <thead>
                         <tr>
@@ -43,7 +59,11 @@ const Records = () => {
                     </tbody>
         
                 </table>
-                <Pagination />        
+                <Pagination 
+                activePage={activePage} 
+                goToPage={handlePageChange}
+                totalPages={recordsResponse?.totalPages}
+                />        
             </h1>
         
         
