@@ -26,8 +26,7 @@ const handlePageChange = (index: number) => {
     return (
 
             <h1 className="page-container">
-                <Filters link="/charts" linkText="VER GRÀFICO"/>
-                <div className="filters-container records-actions">
+                   <div className="filters-container records-actions">
                     <Link to="/charts">
                         <button className="action-filters">
                             VER GRÁFICOS
